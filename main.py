@@ -8,9 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import os
 
-# ================================
-# Settings
-# ================================
+
 API_KEY = "97a9956652ad7410fcbc5233c24ef51e"  # Replace with your API key
 CITY_FILE = "last_city.json"
 
@@ -22,18 +20,16 @@ INDIAN_CITIES = [
     "Ranchi", "Surat", "Thane", "Thiruvananthapuram", "Vadodara", "Varanasi", "Vijayawada", "Visakhapatnam"
 ]
 
-# ================================
+
 # TTS
-# ================================
+
 def speak_weather(text):
     engine = pyttsx3.init()
     engine.setProperty('rate', 150)
     engine.say(text)
     engine.runAndWait()
 
-# ================================
-# File Save/Load
-# ================================
+
 def save_last_city(city):
     with open(CITY_FILE, 'w') as f:
         json.dump({'last_city': city}, f)
@@ -44,9 +40,7 @@ def load_last_city():
             return json.load(f).get('last_city', 'Chennai')
     return 'Chennai'
 
-# ================================
-# Weather Display
-# ================================
+
 def display_weather():
     city = city_var.get().strip()
     if not city:
@@ -104,9 +98,9 @@ def display_weather():
     # Forecast graph
     get_forecast(city)
 
-# ================================
-# 5-Day Forecast Graph
-# ================================
+
+# 5-Day Forecast Graph #
+
 def get_forecast(city):
     forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&units=metric"
     res = requests.get(forecast_url)
@@ -126,9 +120,9 @@ def get_forecast(city):
     ax.set_ylabel("Temperature (°C)")
     chart.draw()
 
-# ================================
+
 # Tkinter GUI Setup
-# ================================
+
 root = Tk()
 root.title("🌦️ Indian Weather App")
 root.geometry("500x600")
